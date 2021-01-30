@@ -1,0 +1,47 @@
+{
+  "name": "teeny-logger",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Arno Versini",
+  "description": "A tiny console logger for nodejs CLI apps",
+  "homepage": "https://github.com/aversini/teeny-logger",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aversini/teeny-logger.git"
+  },
+  "main": "src/index.js",
+  "files": [
+    "src/*.js"
+  ],
+  "scripts": {
+    "bump": "bump-and-release.js -t bump",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s -p angular",
+    "lint:fix": "eslint --fix --color \"./src/**/*.js\" \"./bin/**/*.js\"",
+    "lint": "eslint --color \"./src/**/*.js\" \"./bin/**/*.js\"",
+    "prettier:fix": "prettier --loglevel error --write \"{src/**/*.js,bin/**/*.js}\"",
+    "prettier:all": "npm-run-all --serial prettier:fix lint:fix",
+    "release": "bump-and-release.js -t release",
+    "test": "cross-env NODE_ENV=\"test\" jest",
+    "test:coverage": "npm run test -- --coverage",
+    "test:watch": "npm run test -- --watch"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/cli": "^11.0.0",
+    "@testing-library/jest-dom": "5.11.9",
+    "babel-eslint": "^10.1.0",
+    "bump-and-release": "1.0.0",
+    "conventional-changelog-cli": "^2.1.1",
+    "cross-env": "^7.0.3",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint": "^7.18.0",
+    "husky": "^4.3.8",
+    "jest": "26.6.3",
+    "lint-staged": "^10.5.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "kleur": "4.1.4"
+  }
+}
