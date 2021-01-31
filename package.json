@@ -16,9 +16,9 @@
   "scripts": {
     "bump": "bump-and-release -t bump",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -p angular",
-    "lint:fix": "eslint --fix --color \"./src/**/*.js\" \"./bin/**/*.js\"",
-    "lint": "eslint --color \"./src/**/*.js\" \"./bin/**/*.js\"",
-    "prettier:fix": "prettier --loglevel error --write \"{src/**/*.js,bin/**/*.js}\"",
+    "lint:fix": "eslint --fix --color \"./src/**/*.js\"",
+    "lint": "eslint --color \"./src/**/*.js\"",
+    "prettier:fix": "prettier --loglevel error --write \"{src/**/*.js}\"",
     "prettier:all": "npm-run-all --serial prettier:fix lint:fix",
     "release": "bump-and-release -t release",
     "test": "cross-env NODE_ENV=\"test\" jest",
