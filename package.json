@@ -19,7 +19,7 @@
     "latest": "rimraf LATEST.md && conventional-changelog -o LATEST.md -n \"./configuration/latest/config.js\"",
     "lint:fix": "eslint --fix --color \"./src/**/*.js\"",
     "lint": "eslint --color \"./src/**/*.js\"",
-    "prettier:fix": "prettier --loglevel error --write \"{src/**/*.js}\"",
+    "prettier:fix": "prettier --loglevel error --write \"src/**/*.js\"",
     "prettier:all": "npm-run-all --serial prettier:fix lint:fix",
     "release": "bump-and-release -t release",
     "test": "cross-env NODE_ENV=\"test\" jest",
