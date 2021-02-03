@@ -1,6 +1,6 @@
 const Logger = require("../index");
 
-let mockInfo, mockLog, spyInfo, spyLog;
+let mockInfo, mockLog, spyDate, spyInfo, spyLocaleTime, spyLog;
 
 describe("when testing with logging side-effects", () => {
   beforeEach(() => {
@@ -8,9 +8,17 @@ describe("when testing with logging side-effects", () => {
     mockLog = jest.fn();
     spyInfo = jest.spyOn(console, "info").mockImplementation(mockInfo);
     spyLog = jest.spyOn(console, "log").mockImplementation(mockLog);
+    spyDate = jest
+      .spyOn(Date.prototype, "toDateString")
+      .mockImplementation(() => "Sat Oct 31 2020");
+    spyLocaleTime = jest
+      .spyOn(Date.prototype, "toLocaleTimeString")
+      .mockImplementation(() => "5:00:00 PM");
   });
   afterEach(() => {
+    spyDate.mockRestore();
     spyInfo.mockRestore();
+    spyLocaleTime.mockRestore();
     spyLog.mockRestore();
   });
 
@@ -47,6 +55,31 @@ describe("when testing with logging side-effects", () => {
     expect(mockInfo).toHaveBeenCalledWith("==> Hello World");
   });
 
+  it("should log a simple message with a timestamp", async () => {
+    const log = new Logger();
+    log.boring = true;
+    log.info("Hello World");
+    expect(mockInfo).toHaveBeenCalledWith("Hello World");
+    log.timestamp = true;
+    log.info("Hello World");
+    expect(mockInfo).toHaveBeenCalledWith(
+      "[ Sat Oct 31 2020 5:00:00 PM ] Hello World"
+    );
+  });
+
+  it("should log a simple message with a prefix and a timestamp", async () => {
+    const log = new Logger();
+    log.boring = true;
+    log.info("Hello World");
+    expect(mockInfo).toHaveBeenCalledWith("Hello World");
+    log.timestamp = true;
+    log.prefix = "==>";
+    log.info("Hello World");
+    expect(mockInfo).toHaveBeenCalledWith(
+      "==> [ Sat Oct 31 2020 5:00:00 PM ] Hello World"
+    );
+  });
+
   it("should NOT log a simple message", async () => {
     const log = new Logger();
     log.silent = true;
@@ -78,7 +111,26 @@ describe("when testing with logging side-effects", () => {
     log.info("Hello World");
     expect(mockInfo).toHaveBeenCalledWith("==> Hello World");
     log.prefix = false;
+    log.info("Hello Hell");
+    expect(mockInfo).toHaveBeenCalledWith("Hello Hell");
+  });
+
+  it("should NOT respect the constructor options if type is invalid (prefix)", async () => {
+    const log = new Logger({ prefix: 43 });
+    log.boring = true;
     log.info("Hello World");
     expect(mockInfo).toHaveBeenCalledWith("Hello World");
+  });
+
+  it("should respect the constructor options (timestamp)", async () => {
+    const log = new Logger({ timestamp: true });
+    log.boring = true;
+    log.info("Hello World");
+    expect(mockInfo).toHaveBeenCalledWith(
+      "[ Sat Oct 31 2020 5:00:00 PM ] Hello World"
+    );
+    log.timestamp = false;
+    log.info("Hello Hell");
+    expect(mockInfo).toHaveBeenCalledWith("Hello Hell");
   });
 });

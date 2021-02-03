@@ -25,10 +25,16 @@ const TYPES = [
 ];
 
 class Logger {
-  constructor({ boring = false, silent = false, prefix = null } = {}) {
+  constructor({
+    boring = false,
+    silent = false,
+    prefix = "",
+    timestamp = false,
+  } = {}) {
     this.shouldLog = !silent;
     kleur.enabled = !boring;
-    this.globalPrefix = prefix;
+    this.globalPrefix = typeof prefix === "string" ? prefix : "";
+    this.timestamp = timestamp;
     this.printOptions = {
       colors: !boring,
       depth: 5,
@@ -46,17 +52,37 @@ class Logger {
   }
 
   set prefix(prefix) {
-    this.globalPrefix = prefix;
+    this.globalPrefix = typeof prefix === "string" ? prefix : "";
+  }
+
+  set timestamp(flag) {
+    this.showTimestamp = flag;
   }
 }
 
 TYPES.forEach((type) => {
   Logger.prototype[type.method] = function (...args) {
     if (this.shouldLog) {
-      const msg = this.globalPrefix
-        ? util.formatWithOptions(this.printOptions, this.globalPrefix, ...args)
-        : util.formatWithOptions(this.printOptions, ...args);
+      let msg;
+      if (!this.showTimestamp && !this.globalPrefix) {
+        msg = util.formatWithOptions(this.printOptions, ...args);
+      } else {
+        const prefix = this.globalPrefix ? [this.globalPrefix] : [];
+        if (this.showTimestamp) {
+          const now = new Date();
+          prefix.push(
+            `${kleur.grey(
+              `[ ${now.toDateString()} ${now.toLocaleTimeString()} ]`
+            )}`
+          );
+        }
 
+        msg = util.formatWithOptions(
+          this.printOptions,
+          prefix.join(" "),
+          ...args
+        );
+      }
       console[type.method](`${type.color(msg)}`);
     }
   };

@@ -40,7 +40,7 @@ Teeny Logger relies on `console` behind the scenes, and therefore supports the s
 
 ### Options
 
-#### Disable logging
+#### Disabling logging
 
 You can disable logging with `silent`:
 
@@ -122,6 +122,36 @@ const log = new TeenyLogger({ prefix: "Log:" });
 log.info("this will be logged with a prefix");
 log.prefix = false;
 log.info("this will be NOT be logged with a prefix");
+```
+
+### Adding a local timestamp
+
+You can add a timestamp to the logs with `timestamp`:
+
+```js
+const TeenyLogger = require("teeny-logger");
+const log = new TeenyLogger();
+
+log.info("this will be logged with no timestamp");
+log.timestamp = true;
+log.info("this will have a timestamp!");
+```
+
+The output of that last line would look like:
+
+```sh
+> [ Tue Feb 02 2021 8:32:58 PM ] this will have a timestamp!
+```
+
+This option can also be passed to the constructor:
+
+```js
+const TeenyLogger = require("teeny-logger");
+const log = new TeenyLogger({ timestamp: true });
+
+log.info("this will be logged with a timestamp");
+log.timestamp = false;
+log.info("this will be NOT be logged with a timestamp");
 ```
 
 ## License
