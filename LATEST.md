@@ -1,13 +1,5 @@
-# [0.1.0](https://github.com/aversini/teeny-logger/compare/v0.0.2...v0.1.0) (2021-02-03)
-
 
 ### Features
 
 * better auto-formatting and coloring when possible (Objects, numbers) ([90eae84](https://github.com/aversini/teeny-logger/commit/90eae84c2c50fb4b3bd8510749c4274f9d382b09))
-
-
-
-## 0.0.2 (2021-01-30)
-
-
 
