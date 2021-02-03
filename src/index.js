@@ -29,6 +29,11 @@ class Logger {
     this.shouldLog = !silent;
     kleur.enabled = !boring;
     this.globalPrefix = prefix;
+    this.printOptions = {
+      colors: !boring,
+      depth: 5,
+      compact: false,
+    };
   }
 
   set silent(flag) {
@@ -37,6 +42,7 @@ class Logger {
 
   set boring(flag) {
     kleur.enabled = !flag;
+    this.printOptions.colors = !flag;
   }
 
   set prefix(prefix) {
@@ -48,8 +54,8 @@ TYPES.forEach((type) => {
   Logger.prototype[type.method] = function (...args) {
     if (this.shouldLog) {
       const msg = this.globalPrefix
-        ? util.format(this.globalPrefix, ...args)
-        : util.format(...args);
+        ? util.formatWithOptions(this.printOptions, this.globalPrefix, ...args)
+        : util.formatWithOptions(this.printOptions, ...args);
 
       console[type.method](`${type.color(msg)}`);
     }
