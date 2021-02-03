@@ -33,7 +33,6 @@ module.exports = {
         name: "generate changelog",
         command: "npm run changelog",
       },
-      ,
       {
         name: "generate latest.md file",
         command: "npm run latest",
