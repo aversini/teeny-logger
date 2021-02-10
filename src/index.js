@@ -3,24 +3,24 @@ const kleur = require("kleur");
 const util = require("util");
 const TYPES = [
   {
-    method: "debug",
     color: kleur.grey,
+    method: "debug",
   },
   {
-    method: "log",
     color: kleur.white,
+    method: "log",
   },
   {
-    method: "info",
     color: kleur.blue,
+    method: "info",
   },
   {
-    method: "warn",
     color: kleur.yellow,
+    method: "warn",
   },
   {
-    method: "error",
     color: kleur.red,
+    method: "error",
   },
 ];
 
@@ -37,8 +37,8 @@ class Logger {
     this.timestamp = timestamp;
     this.printOptions = {
       colors: !boring,
-      depth: 5,
       compact: false,
+      depth: 5,
     };
   }
 
