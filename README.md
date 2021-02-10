@@ -1,8 +1,9 @@
 # Teeny Logger
 
-[![npm version](https://badge.fury.io/js/teeny-logger.svg)](https://badge.fury.io/js/teeny-logger)
-<a href="https://david-dm.org/aversini/teeny-logger"><img src="https://david-dm.org/aversini/teeny-logger.svg" alt="Dependency Status"></a>
-<a href="https://david-dm.org/aversini/teeny-logger/?type=dev"><img src="https://david-dm.org/aversini/teeny-logger/dev-status.svg" alt="devDependency Status"></a> ![Build](https://github.com/aversini/teeny-logger/workflows/coverage/badge.svg) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b93bc5e55c0c478aa3339f66ea69f078)](https://www.codacy.com/gh/aversini/teeny-logger/dashboard?utm_source=github.com&utm_medium=referral&utm_content=aversini/teeny-logger&utm_campaign=Badge_Grade)
+![npm](https://img.shields.io/npm/v/teeny-logger?label=version&logo=npm)
+![David](https://img.shields.io/david/aversini/teeny-logger?logo=npm)
+![David](https://img.shields.io/david/dev/aversini/teeny-logger?logo=npm)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aversini/teeny-logger/coverage?label=coverage&logo=github)
 
 > Teeny Logger is a dead-simple console logger for nodejs command-line applications.
 
