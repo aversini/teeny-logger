@@ -32,7 +32,6 @@ class Logger {
     timestamp = false,
   } = {}) {
     this.shouldLog = !silent;
-    kleur.enabled = !boring;
     this.globalPrefix = typeof prefix === "string" ? prefix : "";
     this.timestamp = timestamp;
     this.printOptions = {
@@ -47,7 +46,6 @@ class Logger {
   }
 
   set boring(flag) {
-    kleur.enabled = !flag;
     this.printOptions.colors = !flag;
   }
 
@@ -71,9 +69,11 @@ TYPES.forEach((type) => {
         if (this.showTimestamp) {
           const now = new Date();
           prefix.push(
-            `${kleur.grey(
-              `[ ${now.toDateString()} ${now.toLocaleTimeString()} ]`
-            )}`
+            this.printOptions.colors
+              ? `${kleur.grey(
+                  `[ ${now.toDateString()} ${now.toLocaleTimeString()} ]`
+                )}`
+              : `[ ${now.toDateString()} ${now.toLocaleTimeString()} ]`
           );
         }
 
@@ -83,7 +83,9 @@ TYPES.forEach((type) => {
           ...args
         );
       }
-      console[type.method](`${type.color(msg)}`);
+      console[type.method](
+        this.printOptions.colors ? `${type.color(msg)}` : msg
+      );
     }
   };
 });

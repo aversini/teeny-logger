@@ -35,11 +35,11 @@ describe("when testing with logging side-effects", () => {
     const log = new Logger();
     log.boring = true;
     log.log({
-      toto: 1,
       titi: { tata: 3 },
+      toto: 1,
     });
     expect(mockLog).toHaveBeenCalledWith(
-      "{\n  toto: 1,\n  titi: {\n    tata: 3\n  }\n}"
+      "{\n  titi: {\n    tata: 3\n  },\n  toto: 1\n}"
     );
     log.info();
     expect(mockInfo).toHaveBeenCalledWith("");
@@ -132,5 +132,14 @@ describe("when testing with logging side-effects", () => {
     log.timestamp = false;
     log.info("Hello Hell");
     expect(mockInfo).toHaveBeenCalledWith("Hello Hell");
+  });
+
+  it("should respect the color", async () => {
+    const log = new Logger({ timestamp: true });
+    log.info("Hello Technicolor");
+    expect(log.printOptions.colors).toBe(true);
+    expect(mockInfo).toHaveBeenCalledWith(
+      "[ Sat Oct 31 2020 5:00:00 PM ] Hello Technicolor"
+    );
   });
 });
