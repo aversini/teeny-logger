@@ -7,6 +7,8 @@
 
 > Teeny Logger is a dead-simple console logger for nodejs command-line applications.
 
+**DEPRECATION NOTICE:** For newer Node versions support, please use https://github.com/aversini/node-cli/tree/main/packages/logger
+
 ## Installation
 
 ```sh
